@@ -1,0 +1,194 @@
+Changes in Version 0.4-3
+
+  o Conditionally register all estfun() and bread() S3 methods for model
+    objects, provided that the "sandwich" package is attached.
+
+  o Added native routine registration for esf.c.
+
+  o Use R version of elementary_symmetric_functions() by default on Win/i386
+    due to small numeric differences on that platform.
+
+  o The estfun() method for "btmodel" objects always computed the scores
+    with the last object for the reference category - even if a different
+    ref= was specified in the model. Thanks to Heather Turner for pointing
+    out the problem.
+
+  o The itempar() method for "btmodel" objects miscomputed the variance
+    covariance matrix (unless the first object was used as the ref when
+    estimating the model). Thanks to Heather Turner for pointing out the
+    problem.
+
+
+Changes in Version 0.4-2
+
+  o Added new data set "PairClustering" from Klauer (2006).
+
+  o Fixed replication code in example of StereotypeThreat (reported by
+    Ed Merkle).
+
+  o Basil Abou El-Komboz changed his name to Basil Komboz.
+
+
+Changes in Version 0.4-1
+
+  o Properly imported grDevices and utils in NAMESPACE.
+  
+  o Added new item response data set MathExam14W with esponses of 729
+    students to 13 items in a written exam of introductory mathematics
+    along with several covariates. 
+
+
+Changes in Version 0.4-0
+
+  o New function mptmodel() and corresponding extractor functions for fitting
+    multinomial processing tree (MPT) models. These functions are somewhat
+    experimental, and their user interface might change in future releases.
+
+  o Bug fix in itempar() method for "raschmodel" objects if alias = FALSE.
+    In the previous version the methods had an erroneous trailing NA.
+
+  o Improved item names labeling in plot() method for "itemresp" objects
+    to conform with regionplot() function for IRT models.
+
+  o mscale<-() method for "itemresp" has been improved so that categories
+    can be easily collapsed (e.g., dichotomized).
+
+
+Changes in Version 0.3-0
+
+  o Infrastructure for IRT modeling in "psychotools" is greatly enhanced.
+    Therefore the main modeling functions are now called raschmodel()
+    for Rasch models, rsmodel() for rating scale models, pcmodel()
+    for partial credit models, and btmodel() for Bradley-Terry models.
+    The old *.fit() functions from previous versions of the package still
+    exist but now internally call the new *model() functions. Also, the
+    classes returned have the same names as the *model functions.
+
+  o A unified visualization framework for fitted IRT models has been added:
+    For all types of models (Rasch, RSM, PCM) one can visualize profiles
+    of the item parameters, regions for the most likely response, item
+    or category characteristic curves, item information, and person-item
+    plots. All of these rely on the unified framework for extracting
+    parameters and predictions (see below).
+
+  o New functions and eponymous classes itempar(), threshpar(), and
+    discrpar() to extract/represent item, threshold, and discrimination
+    parameters of item response models. Methods for the IRT models (Rasch,
+    RSM, PCM) are provided. In addition, several methods for standard generic
+    functions (print(), coef(), vcov()) are available.
+
+  o The worth() generic now internally calls the methods for itempar().
+
+  o Estimation of person parameters for a given item response model is
+    now available via the generic function personpar(). Specific methods for
+    Rasch, rating scale and partial credit models allow the estimatation of
+    person parameters via joint maximum likelihood estimation. Methods for
+    standard generic functions (print(), coef(), vcov()) are
+    available for the resulting objects of class "personpar".
+
+  o predict() methods for Rasch, rating scale and partial credit models
+    have been added. For a given fitted model object, these can be 
+    used to predict various types of response probabilities or actual 
+    reponses.
+
+  o New functions anchor() and anchortest() provide a variety of anchor 
+    methods for the detection of uniform differential item functioning 
+    (DIF) between two pre-specified groups in the Rasch model. To test 
+    for DIF, the itemwise Wald test is implemented.
+
+  o itemresp() is the class constructor for responses of n subjects
+    to k items which can be polytomous and have different measurement
+    scales. A wide range of methods to standard generics is provided
+    as well as to generics created for the "paircomp" class. Thus,
+    features can be easily extracted/replaced, summaries/visualizations
+    can be produced, subsetting/merging/etc. is facilitated.
+
+  o The handling of argument 'ref' when producing a region plot (previously
+    called effect plot) was changed. Whereas in the previous implementation,
+    the restriction specified in this argument was applied to the cumulative
+    absolute item threshold parameters, it now is applied to the absolute
+    item threshold parameters.    
+
+  o A bug occuring in pcmodel() when null categories are present and 
+    nullcats = "keep" was fixed. (Thanks to Oliver Prosperi for reporting
+    this.)
+
+  o The processing of the minimal category zero in the function rsmodel() 
+    was changed. Only if for all items, the minimal category is above zero,
+    downcoding takes place. Otherwise, the missing minimal categories are 
+    treated as not observed, i.e., with a frequency of zero.
+
+
+Changes in Version 0.2-0
+
+  o Major update with new model fitting functions (partial credit and
+    rating scale model) and improved infrastructure for conditional
+    maximum likelihood estimation (C implementation of elementary
+    symmetric functions).
+    
+  o Partial credit models (PCMs) can be fitted with the function
+    PCModel.fit(). The interface and return value is similar to that
+    of RaschModel.fit().
+
+  o Rating scale models (RSMs) can be fitted with the function
+    RSModel.fit(). The interface and return value is similar to that
+    of RaschModel.fit() and PCModel.fit().
+
+  o The function elementary_symmetric_functions() for computing ESFs
+    is extended and now part of the exported user interface. The
+    R implementation for binary items up to order 2 is complemented
+    by a C implementation for both binary and polytomous items
+    up to order 1.
+
+  o Due to numerical instabilities in the coefficients and standard 
+    errors between different architectures, the optimization method
+    for Rasch/RSModel/PCModel.fit() was changed from nlm(...) to 
+    optim(..., method = "BFGS"). Consequently, the arguments "reltol"
+    and "maxit" are used now instead of "gradtol" and "iterlim". For
+    backward compatibility RaschModel.fit() still supports the old
+    arguments but might cease to do so in future releases.
+
+
+Changes in Version 0.1-4
+
+  o Added YouthGratitude data from Froh, Fan, Emmons, Bono, Huebner, Watkins
+    (2011, PA), provided by Jeff Froh and Jinyan Fan. Some approximate
+    replication code is provided in the examples (the parts depending on
+    lavaan are in \dontrun).
+
+
+Changes in Version 0.1-3
+
+  o Fully exported elementary_symmetric_functions(). (An extended C
+    implementation is under development and will be included in
+    future releases.)
+
+
+Changes in Version 0.1-2
+
+  o Support of non-integer weights in btReg.fit(). To facilitate this,
+    summary.paircomp() gained a weights argument so that optionally
+    the weights are aggregated instead of observations counted.  
+  
+  o Actually pass on nlm() arguments from RaschModel.fit(). Also
+    support iterlim = 0, i.e., set up model at pre-specified parameters.
+  
+  o Added StereotypeThreat data from Wicherts, Conor, Hessen (2005, JPSP),
+    provided by Jelte M. Wicherts. Replication code is provided in the
+    examples (the parts depending on lavaan are in \dontrun).
+
+
+Changes in Version 0.1-1
+
+  o New "psychotools" package containing all 'base' infrastructure
+    previously contained in "psychotree". This is in order to provide
+    both methods and data that can be reused by "psychotree" and
+    the new package "psychomix" (as well as potentially further packages).
+    
+  o Classes: "paircomp" and associated methods.
+  
+  o Models: btReg.fit() and RaschModel.fit() and associated methods.
+  
+  o Data: Firstnames, GermanParties2009, Soundquality (previoulsy in
+    psychotree) and VerbalAggression (new data, contained in other
+    formatting in difR/verbal and lme4/VerbAgg).
