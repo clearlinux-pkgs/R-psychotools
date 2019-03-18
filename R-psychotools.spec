@@ -4,29 +4,19 @@
 #
 Name     : R-psychotools
 Version  : 0.5.0
-Release  : 8
+Release  : 9
 URL      : https://cran.r-project.org/src/contrib/psychotools_0.5-0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/psychotools_0.5-0.tar.gz
 Summary  : Psychometric Modeling Infrastructure
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
 Requires: R-psychotools-lib = %{version}-%{release}
-Requires: R-mirt
-Requires: R-multcomp
 BuildRequires : R-mirt
 BuildRequires : R-multcomp
 BuildRequires : buildreq-R
 
 %description
-item response data and paired comparisons), basic model fitting functions (for
-  Bradley-Terry, Rasch, parametric logistic IRT, generalized partial credit,
-  rating scale, multinomial processing tree models), extractor functions for
-  different types of parameters (item, person, threshold, discrimination,
-  guessing, upper asymptotes), unified inference and visualizations, and various
-  datasets for illustration.  Intended as a common lightweight and efficient
-  toolbox for psychometric modeling and a common building block for fitting
-  psychometric mixture models in package "psychomix" and trees based on
-  psychometric models in package "psychotree".
+No detailed description available
 
 %package lib
 Summary: lib components for the R-psychotools package.
@@ -44,10 +34,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545279520
+export SOURCE_DATE_EPOCH=1552934670
 
 %install
-export SOURCE_DATE_EPOCH=1545279520
+export SOURCE_DATE_EPOCH=1552934670
 rm -rf %{buildroot}
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -83,8 +73,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library psychotools|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  psychotools || :
 
 
 %files
@@ -123,7 +112,8 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/psychotools/help/psychotools.rdx
 /usr/lib64/R/library/psychotools/html/00Index.html
 /usr/lib64/R/library/psychotools/html/R.css
-/usr/lib64/R/library/psychotools/libs/symbols.rds
+/usr/lib64/R/library/psychotools/tests/Examples/psychotools-Ex.Rout.save
+/usr/lib64/R/library/psychotools/tests/elementary_symmetric_functions.R
 
 %files lib
 %defattr(-,root,root,-)
