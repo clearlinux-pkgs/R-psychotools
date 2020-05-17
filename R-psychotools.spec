@@ -4,21 +4,25 @@
 #
 Name     : R-psychotools
 Version  : 0.5.1
-Release  : 18
+Release  : 19
 URL      : https://cran.r-project.org/src/contrib/psychotools_0.5-1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/psychotools_0.5-1.tar.gz
 Summary  : Psychometric Modeling Infrastructure
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
 Requires: R-psychotools-lib = %{version}-%{release}
-Requires: R-mirt
-Requires: R-multcomp
-BuildRequires : R-mirt
-BuildRequires : R-multcomp
 BuildRequires : buildreq-R
 
 %description
-No detailed description available
+item response data and paired comparisons), basic model fitting functions (for
+  Bradley-Terry, Rasch, parametric logistic IRT, generalized partial credit,
+  rating scale, multinomial processing tree models), extractor functions for
+  different types of parameters (item, person, threshold, discrimination,
+  guessing, upper asymptotes), unified inference and visualizations, and various
+  datasets for illustration.  Intended as a common lightweight and efficient
+  toolbox for psychometric modeling and a common building block for fitting
+  psychometric mixture models in package "psychomix" and trees based on
+  psychometric models in package "psychotree".
 
 %package lib
 Summary: lib components for the R-psychotools package.
@@ -30,21 +34,22 @@ lib components for the R-psychotools package.
 
 %prep
 %setup -q -c -n psychotools
+cd %{_builddir}/psychotools
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1580228726
+export SOURCE_DATE_EPOCH=1589750434
 
 %install
-export SOURCE_DATE_EPOCH=1580228726
+export SOURCE_DATE_EPOCH=1589750434
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
