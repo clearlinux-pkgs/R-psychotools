@@ -5,7 +5,7 @@
 #
 Name     : R-psychotools
 Version  : 0.7.3
-Release  : 47
+Release  : 48
 URL      : https://cran.r-project.org/src/contrib/psychotools_0.7-3.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/psychotools_0.7-3.tar.gz
 Summary  : Psychometric Modeling Infrastructure
